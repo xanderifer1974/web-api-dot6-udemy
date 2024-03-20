@@ -42,14 +42,30 @@ namespace SmartSchool.API.Controllers
             return Ok(Alunos);
         }
 
-        [HttpGet("{id}")]
+        //Aqui precisamos especificar os parâmetros, quando precisarmos fazer uma outra rota com query string, tendo o mesmo verbo.
+        [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            var aluno = Alunos.FirstOrDefault(a => a.Id == id );
+            var aluno = Alunos.FirstOrDefault(a => a.Id == id);
             if (aluno == null)
-                return BadRequest("O aluno não foi encontrado"); 
+                return BadRequest("O aluno não foi encontrado");
 
-            return Ok(aluno);          
+            return Ok(aluno);
+        }
+
+        //Aqui a pesquisa é via queryString
+        [HttpGet("{byName}")]
+        public IActionResult GetByName(string nome, string sobrenome)
+        {
+            var aluno = Alunos.FirstOrDefault(a =>
+            a.Nome.Contains(nome) && a.Sobrenome.Contains(sobrenome)
+            );
+
+            if (aluno == null)
+                return BadRequest("O aluno não foi encontrado");
+
+            return Ok(aluno);
+
         }
 
     }
