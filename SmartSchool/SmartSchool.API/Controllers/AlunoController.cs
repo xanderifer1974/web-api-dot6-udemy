@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SmartSchool.API.Data;
 using SmartSchool.Data.Models;
 
 namespace SmartSchool.API.Controllers
@@ -8,45 +8,50 @@ namespace SmartSchool.API.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {
+        private readonly SmartContext _context;
 
-        public List<Aluno>? Alunos = new List<Aluno>()
+        public AlunoController(SmartContext context)
         {
-            new Aluno()
-            {
-                Id = 1,
-                Nome = "Marcos",
-                Sobrenome= "Almeida",
-                Telefone= "3874-7451"
-            },
-             new Aluno()
-            {
-                Id = 2,
-                Nome = "João",
-                Sobrenome="Barbosa",
-                Telefone= "3874-7448"
-            },
-              new Aluno()
-            {
-                Id = 3,
-                Nome = "Paulo",
-                Sobrenome="Ferreira",
-                Telefone= "3874-7435"
-            }
-        };
+           _context = context;
+        }
 
-        public AlunoController() { }
+        //public List<Aluno>? Alunos = new List<Aluno>()
+        //{
+        //    new Aluno()
+        //    {
+        //        Id = 1,
+        //        Nome = "Marcos",
+        //        Sobrenome= "Almeida",
+        //        Telefone= "3874-7451"
+        //    },
+        //     new Aluno()
+        //    {
+        //        Id = 2,
+        //        Nome = "João",
+        //        Sobrenome="Barbosa",
+        //        Telefone= "3874-7448"
+        //    },
+        //      new Aluno()
+        //    {
+        //        Id = 3,
+        //        Nome = "Paulo",
+        //        Sobrenome="Ferreira",
+        //        Telefone= "3874-7435"
+        //    }
+        //};
+      
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(Alunos);
+            return Ok(_context.Alunos);
         }
 
         //Aqui precisamos especificar os parâmetros, quando precisarmos fazer uma outra rota com query string, tendo o mesmo verbo.
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            var aluno = Alunos.FirstOrDefault(a => a.Id == id);
+            var aluno = _context.Alunos.FirstOrDefault(a => a.Id == id);
             if (aluno == null)
                 return BadRequest("O aluno não foi encontrado");
 
@@ -57,7 +62,7 @@ namespace SmartSchool.API.Controllers
         [HttpGet("{byName}")]
         public IActionResult GetByName(string nome, string sobrenome)
         {
-            var aluno = Alunos.FirstOrDefault(a =>
+            var aluno = _context.Alunos.FirstOrDefault(a =>
             a.Nome.Contains(nome) && a.Sobrenome.Contains(sobrenome)
             );
 
