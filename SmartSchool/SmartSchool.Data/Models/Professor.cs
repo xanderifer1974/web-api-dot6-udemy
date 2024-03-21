@@ -1,4 +1,4 @@
-﻿namespace SmartSchool.API.Models
+﻿namespace SmartSchool.Data.Models
 {
     public class Professor
     {

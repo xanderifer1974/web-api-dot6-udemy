@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SmartSchool.API.Models;
+using SmartSchool.Data.Models;
 
 namespace SmartSchool.API.Controllers
 {

@@ -1,11 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
@@ -20,12 +19,4 @@
 		</PackageReference>
 	</ItemGroup>
 
-
-	<ItemGroup>
-	  <ProjectReference Include="..\SmartSchool.Data\SmartSchool.Data.csproj" />
-	</ItemGroup>
-	
-	
-	
 </Project>
-
