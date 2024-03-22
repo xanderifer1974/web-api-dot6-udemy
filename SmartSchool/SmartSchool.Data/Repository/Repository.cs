@@ -1,27 +1,33 @@
-﻿using SmartSchool.Data.Repository.Interface;
+﻿using SmartSchool.API.Data;
+using SmartSchool.Data.Repository.Interface;
 
 namespace SmartSchool.Data.Repository
 {
     public class Repository : IRepository
     {
-        public void Add()
+        private readonly SmartContext _context;
+        public Repository(SmartContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public void Add<T>(T entity) where T : class
+        {
+            _context.Add(entity);
         }
 
-        public void Delete()
+        public void Delete<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            _context.Remove(entity);
+        }
+        public void Update<T>(T entity) where T : class
+        {
+           _context.Update(entity);
+        }
+        public bool SaveChanges()
+        {
+           return(_context.SaveChanges() > 0);
         }
 
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
