@@ -13,32 +13,7 @@ namespace SmartSchool.API.Controllers
         public AlunoController(SmartContext context)
         {
            _context = context;
-        }
-
-        //public List<Aluno>? Alunos = new List<Aluno>()
-        //{
-        //    new Aluno()
-        //    {
-        //        Id = 1,
-        //        Nome = "Marcos",
-        //        Sobrenome= "Almeida",
-        //        Telefone= "3874-7451"
-        //    },
-        //     new Aluno()
-        //    {
-        //        Id = 2,
-        //        Nome = "João",
-        //        Sobrenome="Barbosa",
-        //        Telefone= "3874-7448"
-        //    },
-        //      new Aluno()
-        //    {
-        //        Id = 3,
-        //        Nome = "Paulo",
-        //        Sobrenome="Ferreira",
-        //        Telefone= "3874-7435"
-        //    }
-        //};
+        }       
       
 
         [HttpGet]
