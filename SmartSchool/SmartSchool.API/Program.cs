@@ -23,7 +23,7 @@ namespace SmartSchool.API
                 options.UseSqlServer(SqlConnectionConfiguration.ConnectionString));
 
             //Injetando um Repositório
-            builder.Services.AddScoped<IRepository, Repository>();
+            builder.Services.AddScoped<IBaseRepository, BaseRepository>();
 
             builder.Services.AddControllers();
 

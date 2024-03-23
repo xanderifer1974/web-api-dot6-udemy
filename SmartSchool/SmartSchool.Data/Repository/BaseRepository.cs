@@ -3,10 +3,10 @@ using SmartSchool.Data.Repository.Interface;
 
 namespace SmartSchool.Data.Repository
 {
-    public class Repository : IRepository
+    public class BaseRepository : IBaseRepository
     {
         private readonly SmartContext _context;
-        public Repository(SmartContext context)
+        public BaseRepository(SmartContext context)
         {
             _context = context;
         }

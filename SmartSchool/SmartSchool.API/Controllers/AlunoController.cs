@@ -10,10 +10,10 @@ namespace SmartSchool.API.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {
-        private readonly IRepository _repository;
+        private readonly IBaseRepository _repository;
         private readonly SmartContext _context;
 
-        public AlunoController(SmartContext context, IRepository repository)
+        public AlunoController(SmartContext context, IBaseRepository repository)
         {
             _context = context;
             _repository = repository;
