@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SmartSchool.Data.Context;
 using SmartSchool.Data.Models;
 using SmartSchool.Data.Repository.Interface;
 
@@ -11,26 +9,26 @@ namespace SmartSchool.API.Controllers
     public class AlunoController : ControllerBase
     {
         private readonly IAlunoRepository _repository;
-        private readonly SmartContext _context;
 
-        public AlunoController(SmartContext context, IAlunoRepository repository)
+        public AlunoController(IAlunoRepository repository)
         {
-            _context = context;
+
             _repository = repository;
-        }       
-      
+        }
+
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_context.Alunos);
+            return Ok(_repository.GetAllAlunos(false)); //Depois tentar resolver quando colocar o parâmetro true
         }
 
         //Aqui precisamos especificar os parâmetros, quando precisarmos fazer uma outra rota com query string, tendo o mesmo verbo.
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            var aluno = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            var aluno = _repository.GetAlunoById(id, false);
+            //var aluno = _context.Alunos.FirstOrDefault(a => a.Id == id);
             if (aluno == null)
                 return BadRequest("O aluno não foi encontrado");
 
@@ -41,9 +39,13 @@ namespace SmartSchool.API.Controllers
         [HttpGet("{byName}")]
         public IActionResult GetByName(string nome, string sobrenome)
         {
-            var aluno = _context.Alunos.FirstOrDefault(a =>
+            var aluno = _repository.GetAllAlunos(false).FirstOrDefault(a =>
             a.Nome.Contains(nome) && a.Sobrenome.Contains(sobrenome)
             );
+
+            // var aluno = _context.Alunos.FirstOrDefault(a =>
+            //a.Nome.Contains(nome) && a.Sobrenome.Contains(sobrenome)
+            //);
 
             if (aluno == null)
                 return BadRequest("O aluno não foi encontrado");
@@ -55,7 +57,7 @@ namespace SmartSchool.API.Controllers
         [HttpPost()]
         public IActionResult Post(Aluno aluno)
         {
-           _repository.AdicionarAluno(aluno);
+            _repository.AdicionarAluno(aluno);
             if (_repository.SalvarAluno())
             {
                 return Ok(aluno);
@@ -67,7 +69,7 @@ namespace SmartSchool.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Aluno aluno)
         {
-            var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id); // Para não travar o select e deixar atualizar
+            var alu = _repository.GetAllAlunos(false).FirstOrDefault(a => a.Id == id); // Para não travar o select e deixar atualizar
             if (alu == null) return BadRequest("Aluno não encontrado");
 
             _repository.AtualizarAluno(aluno);
@@ -83,7 +85,7 @@ namespace SmartSchool.API.Controllers
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, Aluno aluno)
         {
-            var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
+            var alu = _repository.GetAllAlunos(false).FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("Aluno não encontrado");
 
             _repository.AtualizarAluno(aluno);
@@ -98,7 +100,7 @@ namespace SmartSchool.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var aluno = _context.Alunos.FirstOrDefault(a => a.Id == id); //No caso de delete, não precisa colocar o AsNoTracking
+            var aluno = _repository.GetAllAlunos(false).FirstOrDefault(a => a.Id == id); //No caso de delete, não precisa colocar o AsNoTracking
             if (aluno == null) return BadRequest("Aluno não encontrado");
 
             _repository.DeleteAluno(aluno);
