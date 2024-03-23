@@ -1,4 +1,4 @@
-﻿using SmartSchool.API.Data;
+﻿using SmartSchool.Data.Context;
 using SmartSchool.Data.Models;
 using SmartSchool.Data.Repository.Interface;
 

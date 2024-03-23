@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SmartSchool.API.Data;
+using SmartSchool.Data.Context; 
 using SmartSchool.Data;
 using SmartSchool.Data.Repository;
 using SmartSchool.Data.Repository.Interface;
@@ -24,6 +24,8 @@ namespace SmartSchool.API
 
             //Injetando um Repositório
             builder.Services.AddScoped<IBaseRepository, BaseRepository>();
+            builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
+            builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
 
             builder.Services.AddControllers();
 

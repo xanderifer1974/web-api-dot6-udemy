@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SmartSchool.API.Data;
+using SmartSchool.Data.Context;
 using SmartSchool.Data.Models;
 
 namespace SmartSchool.API.Controllers

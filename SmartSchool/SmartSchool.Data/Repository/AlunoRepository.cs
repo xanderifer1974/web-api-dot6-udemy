@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartSchool.API.Data;
+using SmartSchool.Data.Context;
 using SmartSchool.Data.Models;
 using SmartSchool.Data.Repository.Interface;
 
@@ -12,7 +12,7 @@ namespace SmartSchool.Data.Repository
         public AlunoRepository(SmartContext context) : base(context)
         {
             _context = context;
-        }
+        }      
 
         public Aluno[] GetAllAlunos(bool incluirProfessor = false)
         {
@@ -64,6 +64,26 @@ namespace SmartSchool.Data.Repository
 
 
             return query.FirstOrDefault();
+        }
+
+        public void AdicionarAluno(Aluno aluno)
+        {
+           base.Add(aluno);          
+        }
+
+        public void AtualizarAluno(Aluno aluno)
+        {
+           base.Update(aluno);
+        }
+
+        public void DeleteAluno(Aluno aluno)
+        {
+           base.Delete(aluno);
+        }
+
+        public bool SalvarAluno()
+        {
+           return base.SaveChanges();
         }
     }
 }

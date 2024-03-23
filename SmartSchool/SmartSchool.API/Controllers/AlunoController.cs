@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SmartSchool.API.Data;
+using SmartSchool.Data.Context;
 using SmartSchool.Data.Models;
 using SmartSchool.Data.Repository.Interface;
 
@@ -10,10 +10,10 @@ namespace SmartSchool.API.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {
-        private readonly IBaseRepository _repository;
+        private readonly IAlunoRepository _repository;
         private readonly SmartContext _context;
 
-        public AlunoController(SmartContext context, IBaseRepository repository)
+        public AlunoController(SmartContext context, IAlunoRepository repository)
         {
             _context = context;
             _repository = repository;
@@ -55,8 +55,8 @@ namespace SmartSchool.API.Controllers
         [HttpPost()]
         public IActionResult Post(Aluno aluno)
         {
-           _repository.Add(aluno);
-            if (_repository.SaveChanges())
+           _repository.AdicionarAluno(aluno);
+            if (_repository.SalvarAluno())
             {
                 return Ok(aluno);
             }
@@ -70,8 +70,8 @@ namespace SmartSchool.API.Controllers
             var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id); // Para não travar o select e deixar atualizar
             if (alu == null) return BadRequest("Aluno não encontrado");
 
-            _repository.Update(aluno);
-            if (_repository.SaveChanges())
+            _repository.AtualizarAluno(aluno);
+            if (_repository.SalvarAluno())
             {
                 return Ok(aluno);
             }
@@ -86,8 +86,8 @@ namespace SmartSchool.API.Controllers
             var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("Aluno não encontrado");
 
-            _repository.Update(aluno);
-            if (_repository.SaveChanges())
+            _repository.AtualizarAluno(aluno);
+            if (_repository.SalvarAluno())
             {
                 return Ok(aluno);
             }
@@ -101,8 +101,8 @@ namespace SmartSchool.API.Controllers
             var aluno = _context.Alunos.FirstOrDefault(a => a.Id == id); //No caso de delete, não precisa colocar o AsNoTracking
             if (aluno == null) return BadRequest("Aluno não encontrado");
 
-            _repository.Delete(aluno);
-            if (_repository.SaveChanges())
+            _repository.DeleteAluno(aluno);
+            if (_repository.SalvarAluno())
             {
                 return Ok("Aluno excluído");
             }
