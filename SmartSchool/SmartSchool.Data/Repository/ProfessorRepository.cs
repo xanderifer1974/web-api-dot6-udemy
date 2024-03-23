@@ -6,8 +6,10 @@ namespace SmartSchool.Data.Repository
 {
     public class ProfessorRepository : BaseRepository, IProfessorRepository
     {
+        private readonly SmartContext _context;
         public ProfessorRepository(SmartContext context) : base(context)
         {
+            _context = context;
         }
 
         public Professor[] GetAllProfessores()
