@@ -26,7 +26,11 @@ namespace SmartSchool.API
             builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
             builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                 .AddNewtonsoftJson(options =>
+                 {
+                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                 });
 
             var app = builder.Build();
 

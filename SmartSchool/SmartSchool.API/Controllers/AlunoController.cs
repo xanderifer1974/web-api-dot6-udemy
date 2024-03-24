@@ -20,7 +20,7 @@ namespace SmartSchool.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_repository.GetAllAlunos(false)); //Depois tentar resolver quando colocar o parâmetro true
+            return Ok(_repository.GetAllAlunos(true)); //Depois tentar resolver quando colocar o parâmetro true
         }
 
         //Aqui precisamos especificar os parâmetros, quando precisarmos fazer uma outra rota com query string, tendo o mesmo verbo.
@@ -39,7 +39,7 @@ namespace SmartSchool.API.Controllers
         [HttpGet("{byName}")]
         public IActionResult GetByName(string nome, string sobrenome)
         {
-            var aluno = _repository.GetAllAlunos(false).FirstOrDefault(a =>
+            var aluno = _repository.GetAllAlunos(true).FirstOrDefault(a =>
             a.Nome.Contains(nome) && a.Sobrenome.Contains(sobrenome)
             );
 
