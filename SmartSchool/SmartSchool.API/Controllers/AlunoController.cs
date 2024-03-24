@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SmartSchool.Data.DTOs;
 using SmartSchool.Data.Models;
 using SmartSchool.Data.Repository.Interface;
 
@@ -20,7 +21,25 @@ namespace SmartSchool.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_repository.GetAllAlunos(true)); //Depois tentar resolver quando colocar o parâmetro true
+            var alunos = _repository.GetAllAlunos(true);
+            var alunosRetorno = new List<AlunoDto>();
+
+            foreach (var aluno in alunos)
+            {
+                alunosRetorno.Add(new AlunoDto()
+                {
+                    Id = aluno.Id,
+                    Matricula = aluno.Matricula,
+                    Nome = $"{aluno.Nome} {aluno.Sobrenome}",
+                    Telefone = aluno.Telefone,
+                    DataNascimento = aluno.DataNascimento,
+                    DataInicio = aluno.DataInicio,
+                    Ativo = aluno.Ativo
+
+                });
+            }
+
+            return Ok(alunosRetorno); 
         }
 
         //Aqui precisamos especificar os parâmetros, quando precisarmos fazer uma outra rota com query string, tendo o mesmo verbo.
