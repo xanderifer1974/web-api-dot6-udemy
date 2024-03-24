@@ -69,7 +69,7 @@ namespace SmartSchool.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Aluno aluno)
         {
-            var alu = _repository.GetAllAlunos(false).FirstOrDefault(a => a.Id == id); // Para não travar o select e deixar atualizar
+            var alu = _repository.GetAlunoById(id, false); // Para não travar o select e deixar atualizar
             if (alu == null) return BadRequest("Aluno não encontrado");
 
             _repository.AtualizarAluno(aluno);
@@ -85,7 +85,7 @@ namespace SmartSchool.API.Controllers
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, Aluno aluno)
         {
-            var alu = _repository.GetAllAlunos(false).FirstOrDefault(a => a.Id == id);
+            var alu = _repository.GetAlunoById(id, false);
             if (alu == null) return BadRequest("Aluno não encontrado");
 
             _repository.AtualizarAluno(aluno);
@@ -100,7 +100,7 @@ namespace SmartSchool.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var aluno = _repository.GetAllAlunos(false).FirstOrDefault(a => a.Id == id); //No caso de delete, não precisa colocar o AsNoTracking
+            var aluno = _repository.GetAlunoById(id, false); //No caso de delete, não precisa colocar o AsNoTracking
             if (aluno == null) return BadRequest("Aluno não encontrado");
 
             _repository.DeleteAluno(aluno);
