@@ -42,13 +42,6 @@ namespace SmartSchool.API.Controllers
             return Ok(alunoDTO) ;
         }
 
-        //Metodo para obter o objeto AlunoRecordDto
-        [HttpGet("getRegister")]
-        public IActionResult GetRegister()
-        {
-            return Ok(new AlunoRecordDto());
-        }
-
         //Aqui a pesquisa é via queryString
         [HttpGet("{byName}")]
         public IActionResult GetByName(string nome, string sobrenome)

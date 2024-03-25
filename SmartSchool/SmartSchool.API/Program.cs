@@ -4,6 +4,8 @@ using SmartSchool.Data;
 using SmartSchool.Data.Repository;
 using SmartSchool.Data.Repository.Interface;
 
+
+
 namespace SmartSchool.API
 {
     public class Program
@@ -28,6 +30,17 @@ namespace SmartSchool.API
             builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
             builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
 
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("smartschoolapi",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "SmartSchool API",
+                        Version = "1.0"
+
+                    });
+            });
+
             builder.Services.AddControllers()
                  .AddNewtonsoftJson(options =>
                  {
@@ -36,6 +49,13 @@ namespace SmartSchool.API
                  });
 
             var app = builder.Build();
+
+            app.UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/smartschoolapi/swagger.json", "smartschoolapi");
+                    options.RoutePrefix = "";
+                });
 
             // Middleware para roteamento e endpoints
             app.MapControllers();
