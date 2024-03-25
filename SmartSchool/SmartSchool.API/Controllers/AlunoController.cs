@@ -42,6 +42,13 @@ namespace SmartSchool.API.Controllers
             return Ok(alunoDTO) ;
         }
 
+        //Metodo para obter o objeto AlunoRecordDto
+        [HttpGet("getRegister")]
+        public IActionResult GetRegister()
+        {
+            return Ok(new AlunoRecordDto());
+        }
+
         //Aqui a pesquisa é via queryString
         [HttpGet("{byName}")]
         public IActionResult GetByName(string nome, string sobrenome)
@@ -60,7 +67,7 @@ namespace SmartSchool.API.Controllers
         }
 
         [HttpPost()]
-        public IActionResult Post(AlunoDto model)
+        public IActionResult Post(AlunoRecordDto model)
         {
             var aluno = _mapper.Map<Aluno>(model);
 
@@ -74,7 +81,7 @@ namespace SmartSchool.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, AlunoDto model)
+        public IActionResult Put(int id, AlunoRecordDto model)
         {
             var aluno = _repository.GetAlunoById(id, false); // Para não travar o select e deixar atualizar
             if (aluno == null) return BadRequest("Aluno não encontrado");
@@ -92,7 +99,7 @@ namespace SmartSchool.API.Controllers
 
 
         [HttpPatch("{id}")]
-        public IActionResult Patch(int id, AlunoDto model)
+        public IActionResult Patch(int id, AlunoRecordDto model)
         {
             var aluno = _repository.GetAlunoById(id, false);
             if (aluno == null) return BadRequest("Aluno não encontrado");

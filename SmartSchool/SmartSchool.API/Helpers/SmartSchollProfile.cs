@@ -19,6 +19,7 @@ namespace SmartSchool.API.Helpers
                 );
 
             CreateMap<AlunoDto, Aluno>();
+            CreateMap<Aluno, AlunoRecordDto>().ReverseMap();
         }
     }
 }
