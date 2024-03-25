@@ -32,6 +32,7 @@ namespace SmartSchool.API
                  .AddNewtonsoftJson(options =>
                  {
                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                     options.SerializerSettings.DateFormatString = "dd/MM/yyyy";
                  });
 
             var app = builder.Build();
