@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SmartSchool.Data.DTOs;
 using SmartSchool.Data.Models;
 using SmartSchool.Data.Repository.Interface;
@@ -10,36 +11,21 @@ namespace SmartSchool.API.Controllers
     public class AlunoController : ControllerBase
     {
         private readonly IAlunoRepository _repository;
+        private readonly IMapper _mapper;
 
-        public AlunoController(IAlunoRepository repository)
+        public AlunoController(IAlunoRepository repository, IMapper mapper)
         {
 
             _repository = repository;
+            _mapper = mapper;   
         }
 
 
         [HttpGet]
         public IActionResult Get()
         {
-            var alunos = _repository.GetAllAlunos(true);
-            var alunosRetorno = new List<AlunoDto>();
-
-            foreach (var aluno in alunos)
-            {
-                alunosRetorno.Add(new AlunoDto()
-                {
-                    Id = aluno.Id,
-                    Matricula = aluno.Matricula,
-                    Nome = $"{aluno.Nome} {aluno.Sobrenome}",
-                    Telefone = aluno.Telefone,
-                    DataNascimento = aluno.DataNascimento,
-                    DataInicio = aluno.DataInicio,
-                    Ativo = aluno.Ativo
-
-                });
-            }
-
-            return Ok(alunosRetorno); 
+            var alunos = _repository.GetAllAlunos(true);         
+            return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos)); 
         }
 
         //Aqui precisamos especificar os parâmetros, quando precisarmos fazer uma outra rota com query string, tendo o mesmo verbo.
