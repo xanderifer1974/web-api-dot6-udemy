@@ -39,7 +39,7 @@ namespace SmartSchool.API.Controllers
 
             var alunoDTO = _mapper.Map<AlunoDto>(aluno);
 
-            return Ok(aluno);
+            return Ok(alunoDTO) ;
         }
 
         //Aqui a pesquisa é via queryString

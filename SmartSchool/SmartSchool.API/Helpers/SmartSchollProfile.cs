@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using SmartSchool.Data.DTOs;
 using SmartSchool.Data.Models;
-using System.Globalization;
 
 namespace SmartSchool.API.Helpers
 {
@@ -17,7 +16,9 @@ namespace SmartSchool.API.Helpers
                  .ForMember(
                   dest => dest.Idade,
                   opt => opt.MapFrom(src => src.DataNascimento.GetCurranceAge())
-                );                
+                );
+
+            CreateMap<AlunoDto, Aluno>();
         }
     }
 }
