@@ -14,7 +14,7 @@ namespace SmartSchool.Data.Repository
             _context = context;
         }
 
-        public async Task<Aluno[]> GetAllAlunosAsync(bool incluirProfessor)
+        public async Task<List<Aluno>> GetAllAlunosAsync(bool incluirProfessor)
         {
             IQueryable<Aluno> query =   _context.Alunos;
 
@@ -26,7 +26,7 @@ namespace SmartSchool.Data.Repository
             }
 
             query = query.AsNoTracking().OrderBy(a => a.Id);
-            return await  query.ToArrayAsync();
+            return await  query.ToListAsync();
         }
 
         public Aluno[] GetAllAlunos(bool incluirProfessor = false)
