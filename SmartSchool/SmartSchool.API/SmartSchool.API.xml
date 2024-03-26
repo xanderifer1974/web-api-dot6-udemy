@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmartSchool.API</name>
+    </assembly>
+    <members>
+        <member name="T:SmartSchool.API.Controllers.AlunoController">
+            <summary>
+            Controller com as informações de aluno
+            </summary>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.#ctor(SmartSchool.Data.Repository.Interface.IAlunoRepository,AutoMapper.IMapper)">
+            <summary>
+            Método construtor da controller Aluno
+            </summary>
+            <param name="repository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.Get">
+            <summary>
+            Método que obtem todos os alunos cadastrados
+            </summary>
+            <returns>Listas de Alunos</returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.GetById(System.Int32)">
+            <summary>
+            Método que pesquisa aluno por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.GetByName(System.String,System.String)">
+            <summary>
+            Método para pesquisar aluno por nome e sobrenome.
+            </summary>
+            <param name="nome"></param>
+            <param name="sobrenome"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.Post(SmartSchool.Data.DTOs.AlunoRecordDto)">
+            <summary>
+            Método para gravarmos um aluno no banco de dados
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.Put(System.Int32,SmartSchool.Data.DTOs.AlunoRecordDto)">
+            <summary>
+            Método para editarmos um aluno no banco de dados.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.Patch(System.Int32,SmartSchool.Data.DTOs.AlunoRecordDto)">
+            <summary>
+            Metodo para editarmos informações específicas de um aluno no banco de dados.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.AlunoController.Delete(System.Int32)">
+            <summary>
+            Métod para excluir um aluno no banco de dados.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartSchool.API.Controllers.ProfessorController">
+            <summary>
+            Controller Professor
+            </summary>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.#ctor(SmartSchool.Data.Repository.Interface.IProfessorRepository,AutoMapper.IMapper)">
+            <summary>
+            Construtor da controller professor
+            </summary>
+            <param name="repository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.Get">
+            <summary>
+            Método que retorna todos os professores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.GetById(System.Int32)">
+            <summary>
+            Método que retorna professor por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.GetByName(System.String)">
+            <summary>
+            Método que pesquisa professor por nome
+            </summary>
+            <param name="nome"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.Post(SmartSchool.Data.DTOs.ProfessorRecordDto)">
+            <summary>
+            Método para gravar um professor no banco de dados
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.Put(System.Int32,SmartSchool.Data.DTOs.ProfessorRecordDto)">
+            <summary>
+            Método para editar um professor no banco de dados.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.Patch(System.Int32,SmartSchool.Data.DTOs.ProfessorRecordDto)">
+            <summary>
+            Método para editar informações específicas do professor
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controllers.ProfessorController.Delete(System.Int32)">
+            <summary>
+            Método para excluir um professor
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

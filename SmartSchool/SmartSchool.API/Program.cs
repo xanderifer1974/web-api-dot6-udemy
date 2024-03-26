@@ -3,6 +3,7 @@ using SmartSchool.Data.Context;
 using SmartSchool.Data;
 using SmartSchool.Data.Repository;
 using SmartSchool.Data.Repository.Interface;
+using System.Reflection;
 
 
 
@@ -39,6 +40,11 @@ namespace SmartSchool.API
                         Version = "1.0"
 
                     });
+
+                var xmlComentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlComentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlComentsFile);
+
+                options.IncludeXmlComments(xmlComentsFullPath);
             });
 
             builder.Services.AddControllers()
@@ -55,7 +61,10 @@ namespace SmartSchool.API
                 {
                     options.SwaggerEndpoint("/swagger/smartschoolapi/swagger.json", "smartschoolapi");
                     options.RoutePrefix = "";
-                });
+                });          
+            
+
+
 
             // Middleware para roteamento e endpoints
             app.MapControllers();

@@ -6,6 +6,9 @@ using SmartSchool.Data.Repository.Interface;
 
 namespace SmartSchool.API.Controllers
 {
+    /// <summary>
+    /// Controller com as informações de aluno
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AlunoController : ControllerBase
@@ -13,6 +16,11 @@ namespace SmartSchool.API.Controllers
         private readonly IAlunoRepository _repository;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Método construtor da controller Aluno
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="mapper"></param>
         public AlunoController(IAlunoRepository repository, IMapper mapper)
         {
 
@@ -20,7 +28,10 @@ namespace SmartSchool.API.Controllers
             _mapper = mapper;   
         }
 
-
+        /// <summary>
+        /// Método que obtem todos os alunos cadastrados
+        /// </summary>
+        /// <returns>Listas de Alunos</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -28,7 +39,11 @@ namespace SmartSchool.API.Controllers
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos)); 
         }
 
-        //Aqui precisamos especificar os parâmetros, quando precisarmos fazer uma outra rota com query string, tendo o mesmo verbo.
+        /// <summary>
+        /// Método que pesquisa aluno por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
@@ -42,7 +57,12 @@ namespace SmartSchool.API.Controllers
             return Ok(alunoDTO) ;
         }
 
-        //Aqui a pesquisa é via queryString
+        /// <summary>
+        /// Método para pesquisar aluno por nome e sobrenome.
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <param name="sobrenome"></param>
+        /// <returns></returns>
         [HttpGet("{byName}")]
         public IActionResult GetByName(string nome, string sobrenome)
         {
@@ -59,6 +79,11 @@ namespace SmartSchool.API.Controllers
 
         }
 
+        /// <summary>
+        /// Método para gravarmos um aluno no banco de dados
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost()]
         public IActionResult Post(AlunoRecordDto model)
         {
@@ -73,6 +98,12 @@ namespace SmartSchool.API.Controllers
             return BadRequest("Aluno não cadastrado.");
         }
 
+        /// <summary>
+        /// Método para editarmos um aluno no banco de dados.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public IActionResult Put(int id, AlunoRecordDto model)
         {
@@ -90,7 +121,12 @@ namespace SmartSchool.API.Controllers
             return BadRequest("Aluno não atualizado.");
         }
 
-
+        /// <summary>
+        /// Metodo para editarmos informações específicas de um aluno no banco de dados.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, AlunoRecordDto model)
         {
@@ -107,7 +143,11 @@ namespace SmartSchool.API.Controllers
 
             return BadRequest("Aluno não atualizado.");
         }
-
+        /// <summary>
+        /// Métod para excluir um aluno no banco de dados.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
