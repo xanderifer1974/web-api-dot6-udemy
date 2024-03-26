@@ -2,6 +2,9 @@
 
 namespace SmartSchool.Data.DTOs
 {
+    /// <summary>
+    /// Dto que retorna um Aluno
+    /// </summary>
     public class AlunoDto
     {
         public int Id { get; set; }
