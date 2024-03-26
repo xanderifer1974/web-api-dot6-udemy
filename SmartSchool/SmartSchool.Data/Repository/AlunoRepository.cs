@@ -12,7 +12,22 @@ namespace SmartSchool.Data.Repository
         public AlunoRepository(SmartContext context) : base(context)
         {
             _context = context;
-        }      
+        }
+
+        public async Task<Aluno[]> GetAllAlunosAsync(bool incluirProfessor)
+        {
+            IQueryable<Aluno> query =   _context.Alunos;
+
+            if (incluirProfessor)
+            {
+                query = query.Include(a => a.AlunoDisciplinas)
+                    .ThenInclude(ad => ad.Disciplina)
+                    .ThenInclude(d => d.Professor);
+            }
+
+            query = query.AsNoTracking().OrderBy(a => a.Id);
+            return await  query.ToArrayAsync();
+        }
 
         public Aluno[] GetAllAlunos(bool incluirProfessor = false)
         {
@@ -85,5 +100,6 @@ namespace SmartSchool.Data.Repository
         {
            return base.SaveChanges();
         }
+       
     }
 }
