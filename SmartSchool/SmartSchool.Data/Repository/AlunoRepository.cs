@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data.Context;
+using SmartSchool.Data.Helpers;
 using SmartSchool.Data.Models;
 using SmartSchool.Data.Repository.Interface;
 
@@ -14,7 +15,7 @@ namespace SmartSchool.Data.Repository
             _context = context;
         }
 
-        public async Task<List<Aluno>> GetAllAlunosAsync(bool incluirProfessor)
+        public async Task<PageList<Aluno>> GetAllAlunosAsync(bool incluirProfessor)
         {
             IQueryable<Aluno> query =   _context.Alunos;
 
@@ -26,7 +27,9 @@ namespace SmartSchool.Data.Repository
             }
 
             query = query.AsNoTracking().OrderBy(a => a.Id);
-            return await  query.ToListAsync();
+         
+            return await PageList<Aluno>.CreateAsync(query, 1, 5);
+
         }
 
         public Aluno[] GetAllAlunos(bool incluirProfessor = false)

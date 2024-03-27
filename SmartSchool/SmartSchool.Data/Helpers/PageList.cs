@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace SmartSchool.API.Helpers
+namespace SmartSchool.Data.Helpers
 {
     public class PageList<T> : List<T>
     {
@@ -27,6 +27,5 @@ namespace SmartSchool.API.Helpers
                                     .ToListAsync();
             return new PageList<T>(items, count, pageNumber, pageSize);
         }
-
     }
 }
