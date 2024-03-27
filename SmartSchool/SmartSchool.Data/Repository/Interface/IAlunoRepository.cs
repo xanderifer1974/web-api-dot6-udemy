@@ -5,7 +5,7 @@ namespace SmartSchool.Data.Repository.Interface
 {
     public interface IAlunoRepository
     {
-        Task<PageList<Aluno>> GetAllAlunosAsync(bool incluirProfessor);
+        Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool incluirProfessor);
         Aluno[] GetAllAlunos(bool incluirProfessor);
         Aluno[] GetAllAlunosByDisciplina(int disciplinaId, bool incluirProfessor);
         Aluno GetAlunoById(int alunoId, bool incluirProfessor);

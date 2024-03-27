@@ -15,7 +15,7 @@ namespace SmartSchool.Data.Repository
             _context = context;
         }
 
-        public async Task<PageList<Aluno>> GetAllAlunosAsync(bool incluirProfessor)
+        public async Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool incluirProfessor)
         {
             IQueryable<Aluno> query =   _context.Alunos;
 
@@ -28,7 +28,7 @@ namespace SmartSchool.Data.Repository
 
             query = query.AsNoTracking().OrderBy(a => a.Id);
          
-            return await PageList<Aluno>.CreateAsync(query, 1, 5);
+            return await PageList<Aluno>.CreateAsync(query, pageParams.PageNumber, pageParams.PageSize);
 
         }
 

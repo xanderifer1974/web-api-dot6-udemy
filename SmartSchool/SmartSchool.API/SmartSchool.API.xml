@@ -16,7 +16,7 @@
             <param name="repository"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Get">
+        <member name="M:SmartSchool.API.Controllers.AlunoController.Get(SmartSchool.Data.Helpers.PageParams)">
             <summary>
             Método que obtem todos os alunos cadastrados
             </summary>
